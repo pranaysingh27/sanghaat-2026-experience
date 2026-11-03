@@ -37,6 +37,9 @@
     .top-actions{display:flex;align-items:center;gap:8px}
     .smallbtn{border:1px solid #6f1822;background:#16080a;color:white;border-radius:2px;padding:9px 11px;font-size:11px;font-weight:800;letter-spacing:.05em;cursor:pointer}
     .smallbtn:hover{background:#4a0710}
+    .download-strip{display:flex;justify-content:center;padding:14px 12px 4px;background:#080808}
+    .downloadbtn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;text-align:center;border:1px solid #ff6875;background:linear-gradient(135deg,#fa102b,#8c0615);color:#fff;padding:13px 18px;font-size:12px;font-weight:900;letter-spacing:.08em;box-shadow:0 0 20px #e5092030;clip-path:polygon(0 0,96% 0,100% 25%,100% 100%,4% 100%,0 75%)}
+    .downloadbtn:active{transform:scale(.98)}
     .status{font-size:10px;color:#aaa;white-space:nowrap}
     .pages{width:min(900px,100%);margin:0 auto;padding:12px 8px 42px}
     .page{position:relative;margin:0 auto 14px;width:100%;line-height:0;background:#151515;box-shadow:0 8px 28px #000;overflow:hidden;isolation:isolate}
@@ -80,6 +83,7 @@
         <button class="smallbtn" id="topButton" type="button">↑ TOP</button>
       </div>
     </header>
+    <div class="download-strip"><a class="downloadbtn" href="assets/sanghaat-brochure.pdf" download="Sanghaat-2026-Full-Brochure.pdf">↓ &nbsp; DOWNLOAD FULL BROCHURE (PDF)</a></div>
     <section class="pages" id="pages" aria-label="Sanghaat 2026 flyer pages"></section>
     <div class="endnote">END OF FILE · SANGHAAT 2026 · BELLA CIAO</div>
   </main>
