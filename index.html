@@ -181,7 +181,6 @@
       // Open a tab synchronously during the tap so mobile popup blockers are less likely to block it.
       const destination = window.open('about:blank', '_blank');
       activation.classList.add('on');
-      try { song.play().catch(()=>{}); } catch(e) {}
       setTimeout(() => {
         activation.classList.remove('on');
         if (destination) { destination.location.href = url; }
