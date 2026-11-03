@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="SANGHAAT 2026 — The Money Heist Experience. Explore the festival flyer and register for events.">
+  <title>SANGHAAT 2026 | The Heist Begins</title>
+  <style>
+    :root{--red:#e50920;--dark:#080808;--paper:#111;--muted:#bcbcbc}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--dark)}
+    body{margin:0;background:var(--dark);color:#fff;font-family:Arial,Helvetica,sans-serif}
+    button,a{-webkit-tap-highlight-color:transparent}
+    .intro{min-height:100svh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:28px 18px;background:radial-gradient(ellipse at 50% 40%,#3a060c 0,#160306 36%,#080808 76%)}
+    .intro:before,.intro:after{content:"";position:absolute;inset:-30%;pointer-events:none}
+    .intro:before{background:repeating-linear-gradient(115deg,transparent 0 75px,rgba(229,9,32,.06) 76px 78px);animation:drift 16s linear infinite}
+    .intro:after{background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.8) 78%)}
+    .intro-card{z-index:1;position:relative;width:min(720px,100%);text-align:center;padding:clamp(24px,6vw,58px) 18px;border:1px solid rgba(229,9,32,.55);background:rgba(0,0,0,.54);box-shadow:0 0 44px #e5092022,inset 0 0 35px #e5092010}
+    .classified{font-size:11px;letter-spacing:.35em;color:#ff4b59;font-weight:800}
+    .mask{font-size:clamp(42px,12vw,82px);line-height:1;margin:24px 0 12px;filter:drop-shadow(0 0 18px #e5092066)}
+    h1{margin:0;font-size:clamp(32px,8vw,66px);font-weight:900;letter-spacing:.045em;line-height:.98;text-transform:uppercase;text-shadow:3px 3px 0 #5a0710}
+    h1 span{display:block;color:var(--red)}
+    .subtitle{color:#d0c9c9;letter-spacing:.13em;font-size:clamp(10px,2.7vw,14px);margin:20px 0 30px}
+    .play{border:1px solid #ff6875;background:linear-gradient(135deg,#fa102b,#8c0615);color:white;padding:17px 25px;min-width:min(300px,100%);font-weight:900;letter-spacing:.12em;font-size:15px;cursor:pointer;box-shadow:0 0 22px #e5092045;transition:transform .18s,box-shadow .18s;clip-path:polygon(0 0,94% 0,100% 28%,100% 100%,6% 100%,0 72%)}
+    .play:hover{transform:translateY(-2px);box-shadow:0 0 32px #e5092090}.play:active{transform:scale(.96)}
+    .play:disabled{opacity:.7;cursor:wait}
+    .fine{font-size:11px;color:#aaa;margin:18px 0 0;line-height:1.6}
+    .intro.hide{animation:closeIntro .85s forwards;pointer-events:none}
+    @keyframes drift{to{transform:translate3d(40px,-30px,0)}}
+    @keyframes closeIntro{to{opacity:0;transform:scale(1.04);visibility:hidden}}
+    .booklet{display:none;min-height:100vh;background:#080808}
+    .booklet.show{display:block;animation:reveal .8s ease both}
+    @keyframes reveal{from{opacity:0;filter:brightness(0)}to{opacity:1;filter:brightness(1)}}
+    .topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:rgba(8,8,8,.94);border-bottom:1px solid #4e0b12;backdrop-filter:blur(12px)}
+    .brand{font-size:12px;letter-spacing:.12em;font-weight:900}.brand b{color:var(--red)}
+    .top-actions{display:flex;align-items:center;gap:8px}
+    .smallbtn{border:1px solid #6f1822;background:#16080a;color:white;border-radius:2px;padding:9px 11px;font-size:11px;font-weight:800;letter-spacing:.05em;cursor:pointer}
+    .smallbtn:hover{background:#4a0710}
+    .status{font-size:10px;color:#aaa;white-space:nowrap}
+    .pages{width:min(900px,100%);margin:0 auto;padding:12px 8px 42px}
+    .page{position:relative;margin:0 auto 14px;width:100%;line-height:0;background:#151515;box-shadow:0 8px 28px #000;overflow:hidden;isolation:isolate}
+    .page img{display:block;width:100%;height:auto;user-select:none;-webkit-user-drag:none}
+    .hotspot{position:absolute;display:block;z-index:2;outline:none;background:rgba(229,9,32,0);border-radius:3px;cursor:pointer}
+    .hotspot:focus-visible{outline:3px solid #ff3046;background:#e5092022}
+    .hotspot:hover{background:rgba(229,9,32,.08)}
+    .page-number{position:absolute;left:8px;top:8px;z-index:3;line-height:1;font-size:10px;color:#fff;background:#090909cc;padding:6px 7px;border:1px solid #e5092055;opacity:0;transition:opacity .2s}
+    .page:hover .page-number{opacity:1}
+    .endnote{text-align:center;color:#888;font-size:11px;letter-spacing:.12em;padding:20px}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;z-index:50;background:#b5091b;color:white;padding:12px 16px;font-size:12px;font-weight:800;letter-spacing:.08em;box-shadow:0 5px 25px #000;transition:.25s;pointer-events:none;text-align:center;width:max-content;max-width:90vw}
+    .toast.on{opacity:1;transform:translate(-50%,0)}
+    .activation{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:rgba(0,0,0,.93);opacity:0;pointer-events:none;transition:opacity .22s}
+    .activation.on{opacity:1}
+    .activation-inner{text-align:center;padding:24px;border:1px solid #e50920;box-shadow:0 0 50px #e5092040;animation:stamp .65s ease both}
+    .activation-inner strong{display:block;color:#f21b31;font-size:clamp(24px,7vw,52px);letter-spacing:.08em}
+    .activation-inner span{display:block;margin-top:10px;font-size:11px;letter-spacing:.25em;color:#ddd}
+    @keyframes stamp{0%{transform:scale(1.4);opacity:0}55%{transform:scale(.96);opacity:1}100%{transform:scale(1);opacity:1}}
+    @media(min-width:700px){.pages{padding:22px 14px 54px}.page{margin-bottom:22px}.topbar{padding:12px 22px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <section class="intro" id="intro" aria-label="Sanghaat opening screen">
+    <div class="intro-card">
+      <div class="classified">CLASSIFIED ACCESS · DECEMBER 14–16, 2026</div>
+      <div class="mask" aria-hidden="true">🎭</div>
+      <h1>SANGHAAT <span>2026</span></h1>
+      <p class="subtitle">THE MONEY HEIST EXPERIENCE</p>
+      <button class="play" id="playButton" type="button">▶ &nbsp; PLAY THE HEIST</button>
+      <p class="fine">Tap to start the music and open the official festival flyer.<br>Use headphones for the full experience.</p>
+    </div>
+  </section>
+
+  <main class="booklet" id="booklet">
+    <header class="topbar">
+      <div class="brand">SANGHAAT <b>2026</b> <span style="color:#777;font-weight:400">/ THE HEIST</span></div>
+      <div class="top-actions">
+        <span class="status" id="musicStatus">MUSIC ON</span>
+        <button class="smallbtn" id="musicToggle" type="button">PAUSE MUSIC</button>
+        <button class="smallbtn" id="topButton" type="button">↑ TOP</button>
+      </div>
+    </header>
+    <section class="pages" id="pages" aria-label="Sanghaat 2026 flyer pages"></section>
+    <div class="endnote">END OF FILE · SANGHAAT 2026 · BELLA CIAO</div>
+  </main>
+
+  <audio id="song" preload="auto" loop src="assets/bella-ciao.mp3"></audio>
+  <div class="activation" id="activation" aria-hidden="true"><div class="activation-inner"><strong>HEIST ACTIVATED</strong><span>CONNECTING TO REGISTRATION...</span></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Registration URLs are taken from the links embedded in the supplied 23-page PDF.
+    const pageLinks = {
+      10: [
+        // QR / linked area on the BGMI page
+        {url:'https://docs.google.com/forms/d/1OKKDWJDn5lCT9axzQzjnnv4XedibATPLhZNbbWNvlf8/viewform?edit_requested=true', x:80, y:60, w:20, h:27, label:'Open linked QR registration'},
+        // CLICK TO REGISTER on the same page
+        {url:'https://docs.google.com/forms/d/e/1FAIpQLScCVSBXI0MbaMfXqDnMjLcSl_vPz4dMMEVrL0MeCAYYopxYXQ/viewform', x:60, y:87, w:39, h:10, label:'Register for BGMI'}
+      ],
+      11: [{url:'https://docs.google.com/forms/d/e/1FAIpQLSfwSbGUpy8qeCWH69tznjRBn54woP_uw0ihp-BzysLaY43hCA/viewform', x:60, y:88, w:39, h:10, label:'Register for Free Fire'}],
+      12: [{url:'https://docs.google.com/forms/d/1OKKDWJDn5lCT9axzQzjnnv4XedibATPLhZNbbWNvlf8/viewform?edit_requested=true', x:60, y:84, w:39, h:12, label:'Register for Rangoli'}],
+      14: [{url:'https://docs.google.com/forms/d/16LZbmixQ_EbiYqeMoW1GhjheyH6EaN5QQkmaVQwuvHE/viewform?edit_requested=true', x:58, y:87, w:40, h:10, label:'Register for Poster Making'}],
+      15: [{url:'https://docs.google.com/forms/d/1DA-XlsXfjd0dC3a7Eek6yRFWcj32TTZ1gpxlq6uYKAQ/viewform?edit_requested=true', x:57, y:86, w:41, h:11, label:'Register for Ludo King'}],
+      16: [{url:'https://docs.google.com/forms/d/1P6GDdypzQujz7R4NSzJf_EmmWK67Tw80LRs4gGdsCuk/viewform?pli=1&edit_requested=true', x:59, y:88, w:39, h:10, label:'Register for Mr. and Ms.'}],
+      18: [{url:'https://docs.google.com/forms/d/e/1FAIpQLSfYrXlS5Z5vC1MgC-156rsrgGiLw8xZK725ku3i1lk-oJEmEw/viewform', x:58, y:86, w:40, h:11, label:'Register for Rap Battle'}],
+      19: [{url:'https://docs.google.com/forms/d/14_QPZY8rOV1ZxytQEOhIjBb_NQGWhl1lZV7naaMYlYw/viewform?edit_requested=true', x:56, y:87, w:42, h:11, label:'Register for Singing'}],
+      20: [{url:'https://docs.google.com/forms/d/14_QPZY8rOV1ZxytQEOhIjBb_NQGWhl1lZV7naaMYlYw/viewform?edit_requested=true', x:57, y:85, w:41, h:11, label:'Register for Singing'}],
+      21: [{url:'https://docs.google.com/forms/d/1ViqcKYQILsSMVOsnTooRMAAb6gushcJPlG2I2H6dksc/viewform?edit_requested=true', x:58, y:86, w:40, h:11, label:'Register for Solo Dance'}],
+      22: [{url:'https://docs.google.com/forms/d/1ViqcKYQILsSMVOsnTooRMAAb6gushcJPlG2I2H6dksc/viewform?edit_requested=true', x:60, y:85, w:38, h:11, label:'Register for Group Dance'}]
+    };
+    const pagesEl = document.getElementById('pages');
+    for (let n = 1; n <= 23; n++) {
+      const page = document.createElement('article');
+      page.className = 'page';
+      page.id = `page-${n}`;
+      const img = document.createElement('img');
+      img.src = `assets/pages/page-${String(n).padStart(2,'0')}.jpg`;
+      img.alt = `Sanghaat 2026 flyer page ${n}`;
+      img.loading = n <= 2 ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      page.appendChild(img);
+      const num = document.createElement('span');
+      num.className = 'page-number';
+      num.textContent = `PAGE ${String(n).padStart(2,'0')} / 23`;
+      page.appendChild(num);
+      (pageLinks[n] || []).forEach(link => {
+        const a = document.createElement('a');
+        a.className = 'hotspot';
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', link.label);
+        a.title = link.label;
+        a.style.left = link.x + '%'; a.style.top = link.y + '%';
+        a.style.width = link.w + '%'; a.style.height = link.h + '%';
+        a.addEventListener('click', (event) => {
+          event.preventDefault();
+          activateAndOpen(link.url);
+        });
+        page.appendChild(a);
+      });
+      pagesEl.appendChild(page);
+    }
+
+    const intro = document.getElementById('intro');
+    const booklet = document.getElementById('booklet');
+    const playButton = document.getElementById('playButton');
+    const song = document.getElementById('song');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicStatus = document.getElementById('musicStatus');
+    const activation = document.getElementById('activation');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function showToast(message) {
+      toast.textContent = message; toast.classList.add('on');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('on'), 2200);
+    }
+    playButton.addEventListener('click', async () => {
+      playButton.disabled = true; playButton.textContent = 'OPENING THE FILE...';
+      try { await song.play(); musicStatus.textContent = 'MUSIC ON'; musicToggle.textContent = 'PAUSE MUSIC'; }
+      catch (e) { showToast('Tap the music control if playback is blocked by your browser.'); }
+      intro.classList.add('hide');
+      setTimeout(() => {
+        intro.style.display = 'none';
+        booklet.classList.add('show');
+        window.scrollTo({top:0, behavior:'instant'});
+      }, 420);
+    });
+    musicToggle.addEventListener('click', async () => {
+      if (song.paused) {
+        try { await song.play(); musicStatus.textContent = 'MUSIC ON'; musicToggle.textContent = 'PAUSE MUSIC'; }
+        catch(e) { showToast('Audio could not play. Please check the file.'); }
+      } else { song.pause(); musicStatus.textContent = 'MUSIC OFF'; musicToggle.textContent = 'PLAY MUSIC'; }
+    });
+    document.getElementById('topButton').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    function activateAndOpen(url) {
+      // Open a tab synchronously during the tap so mobile popup blockers are less likely to block it.
+      const destination = window.open('about:blank', '_blank');
+      activation.classList.add('on');
+      try { song.play().catch(()=>{}); } catch(e) {}
+      setTimeout(() => {
+        activation.classList.remove('on');
+        if (destination) { destination.location.href = url; }
+        else { showToast('Your browser blocked the form tab. Tap the registration link again or allow pop-ups.'); }
+      }, 650);
+    }
+  </script>
+</body>
+</html>
