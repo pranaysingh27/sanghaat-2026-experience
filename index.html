@@ -174,7 +174,7 @@
       if (song.paused) {
         try { await song.play(); musicStatus.textContent = 'MUSIC ON'; musicToggle.textContent = 'PAUSE MUSIC'; }
         catch(e) { showToast('Audio could not play. Please check the file.'); }
-      } else { song.pause(); musicStatus.textContent = 'MUSIC OFF'; musicToggle.textContent = 'PLAY MUSIC'; }
+      } else { song.pause(); musicStatus.textContent = 'MUSIC OFF'; musicToggle.textContent = 'MUSIC Chalu karo'; }
     });
     document.getElementById('topButton').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
     function activateAndOpen(url) {
